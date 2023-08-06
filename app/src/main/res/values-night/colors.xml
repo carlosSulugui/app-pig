@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name = "strokeColor">#63636D</color>
+    <color name = "edit_background">#494947</color>
+    <color name = "btn_background">#FF9800</color>
+</resources>
