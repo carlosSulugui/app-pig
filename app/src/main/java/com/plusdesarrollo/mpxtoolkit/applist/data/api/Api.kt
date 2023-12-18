@@ -11,9 +11,9 @@ import retrofit2.http.POST
 import retrofit2.http.Path
 
 interface RemoteService {
-    @GET("getProvides")
+    @GET("task/provider")
     suspend fun  getProvides():Response<ProviderListRemote>
-    @POST("setProvider")
+    @POST("task/provider")
     suspend fun setProvides(@Body provider: ProvidersRemote):Response<ResponseProvider>
     @GET("/searchprovides")
     suspend fun searchProvides(@Path ("name") name: String):WrapperResponse<ProviderListRemote>

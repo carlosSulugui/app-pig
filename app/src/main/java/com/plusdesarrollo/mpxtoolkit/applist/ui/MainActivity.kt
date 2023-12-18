@@ -1,4 +1,4 @@
-package com.plusdesarrollo.mpxtoolkit.applist
+package com.plusdesarrollo.mpxtoolkit.applist.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -6,9 +6,9 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.plusdesarrollo.mpxtoolkit.applist.R
 import com.plusdesarrollo.mpxtoolkit.applist.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.HiltAndroidApp
 
 @AndroidEntryPoint
 

@@ -21,7 +21,7 @@ class Modules {
     @Provides
     @Singleton
     @APIUrl
-    fun providerAPIUrl():String  = "http://192.168.0.103:5000/api/v1/provider/"
+    fun providerAPIUrl():String  = "http://192.168.0.106:3000/api/tasks/"
 
     @Provides
     @Singleton

@@ -15,4 +15,14 @@
         android:name="com.plusdesarrollo.mpxtoolkit.applist.ui.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/todoFragment"
+        android:name="com.plusdesarrollo.mpxtoolkit.applist.ui.task.TodoFragment"
+        android:label="fragment_todo"
+        tools:layout="@layout/fragment_todo" />
+    <fragment
+        android:id="@+id/createTaskFragment"
+        android:name="com.plusdesarrollo.mpxtoolkit.applist.ui.task.CreateTaskFragment"
+        android:label="fragment_create_task"
+        tools:layout="@layout/fragment_create_task" />
 </navigation>

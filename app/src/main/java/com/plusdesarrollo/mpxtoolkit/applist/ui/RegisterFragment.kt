@@ -5,18 +5,15 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.provider.MediaStore
-import android.provider.MediaStore.Audio.Media
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-
 import androidx.lifecycle.lifecycleScope
-import com.plusdesarrollo.mpxtoolkit.applist.R
+import com.plusdesarrollo.mpxtoolkit.applist.creational.builder.ProviderBuilder
 import com.plusdesarrollo.mpxtoolkit.applist.data.datasource.location.Geolocation
 import com.plusdesarrollo.mpxtoolkit.applist.data.local.Message
 import com.plusdesarrollo.mpxtoolkit.applist.data.model.ProvidersRemote
@@ -26,13 +23,15 @@ import com.plusdesarrollo.mpxtoolkit.applist.utils.Success
 import com.plusdesarrollo.mpxtoolkit.applist.utils.text
 import com.plusdesarrollo.mpxtoolkit.applist.utils.toast
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import java.io.ByteArrayOutputStream
 import java.util.Base64
+import javax.inject.Inject
 
 @AndroidEntryPoint
-class RegisterFragment : Fragment() {
+class RegisterFragment(
+
+) :  Fragment() {
     private var _binding: FragmentRegisterBinding? = null
     private val binding get() = _binding!!
     private val viewModelPost: ViewModelProvider by viewModels()
@@ -71,26 +70,28 @@ class RegisterFragment : Fragment() {
     private suspend fun postProvider() {
         val name = binding.editName.text()
         val price = binding.editPrice.text().toInt()
-        val location = binding.editLocation.text()
         val weight = binding.editPeso.text().toInt()
+        val phone = binding.editTelephone.text()
+
+        val provider = ProviderBuilder()
+            .setName(name)
+            .setPrice(price.toString().toDouble())
+            .setWeight(weight)
+            .setPhone(phone)
+            .setPhoto(imagePhoto)
+            .setId("27f0afcb-97d2-11ee-a208-0242ac150002")
+            .setStatus("vivo")
+            .setAddress("calle 1")
+            .build()
 
 
-        val body = ProvidersRemote(
-            name = name,
-            isCansel = true,
-            price = price,
-            weight = weight,
-            address = location,
-            photo = imagePhoto
-        )
 
         when {
             name.isEmpty() -> error("el nombre es obligagtorio")
             price.toString().isEmpty() -> error("capo obligarorio")
             weight.toString().isEmpty() -> error("capo obligarorio")
-            location.isEmpty() -> error("capo obligarorio")
             else -> {
-                postData(body)
+                postData(provider)
             }
         }
 
@@ -103,6 +104,7 @@ class RegisterFragment : Fragment() {
             when (res) {
                 is Success.Failure -> {
                     activity?.toast(res.error)
+                    Log.d("error","${ res.error }")
                 }
 
                 is Success.Loading -> {

@@ -9,11 +9,11 @@ import retrofit2.http.GET
 object ApiRest {
     private val builder: Retrofit.Builder = Retrofit
         .Builder()
-        .baseUrl("http://192.168.0.101:5000/api/v1/provider/")
+        .baseUrl("http://192.168.0.106:3000/api/tasks/")
         .addConverterFactory(GsonConverterFactory.create())
 
     interface ApiInterface {
-        @GET("getProvides")
+        @GET("task/provider")
         fun getProvides(): Call<ProviderListRemote>
 
     }

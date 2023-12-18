@@ -37,10 +37,10 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
         @SuppressLint("SetTextI18n")
         fun bind(user: ProviderLocal) = with(binding) {
             textName.text = "Nombre: ${user.name}"
-            textTelephone.text = "Telefono: ${user.telephone}"
-            textAddress.text = "Ubicacion ${user.address}"
-            textPrise.text = "Precio: ${user.price.toString()}"
-            textPeso.text = "Peso aprox: $"
+            textTelephone.text = "Telefono: ${user.phone}"
+            textPrise.text = "QGT ${user.price.toString()}"
+            textPeso.text = "Peso Lb:${user.weight}"
+            textAddress.text = "${user.address}"
 
             user.photo?.let {image ->
                 val imageBytes = Base64.decode(image , Base64.DEFAULT)

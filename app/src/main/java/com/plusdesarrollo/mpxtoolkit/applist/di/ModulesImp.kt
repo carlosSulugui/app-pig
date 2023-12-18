@@ -1,6 +1,8 @@
 package com.plusdesarrollo.mpxtoolkit.applist.di
 
 
+import com.plusdesarrollo.mpxtoolkit.applist.creational.builder.BuilderInterface
+import com.plusdesarrollo.mpxtoolkit.applist.creational.builder.ProviderBuilder
 import com.plusdesarrollo.mpxtoolkit.applist.data.datasource.CreateProviderServerDataSource
 import com.plusdesarrollo.mpxtoolkit.applist.data.datasource.CreateProviderRemoteDataSource
 import com.plusdesarrollo.mpxtoolkit.applist.data.datasource.GetProviderRemoteDataSource
@@ -11,6 +13,7 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import kotlin.experimental.ExperimentalTypeInference
 
 @Module
 
@@ -25,4 +28,9 @@ abstract class ModulesImp {
 
     @Binds
     abstract fun bindSearchProviderRemoteSource(searchProviderDataSource: SearchProviderServerDataSource): SearchProviderDataSource
+
+    @Binds
+    abstract fun bindBuilderInterface(providerBuilder: ProviderBuilder): BuilderInterface
+
+
 }

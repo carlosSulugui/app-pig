@@ -37,5 +37,5 @@ private fun ProviderListRemote.toDomainModel() =
 
 fun ProvidersRemote.toDomainModel() =
     ProviderLocal(
-        _id, name, isCansel, price, address, telephone, photo, weight
+        name, phone, task_id, price?.toString(), weight?.toString(), status, photo, address
     )
