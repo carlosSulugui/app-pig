@@ -18,3 +18,9 @@ data class ProvidersRemote(
     val photo:String? = null,
     val address:String? =null
 )
+
+
+
+
+
+

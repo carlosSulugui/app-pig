@@ -24,9 +24,6 @@ class GetProviderServerDataSource @Inject constructor(
     }
 }
 
-//mapper remote to local model
-
-//mapper remote to local model
 private fun ProviderListRemote.toDomainModel() =
     ProviderListLocal(
         providers!!.map {

@@ -11,6 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.plusdesarrollo.mpxtoolkit.applist.data.api.ApiRest
 import com.plusdesarrollo.mpxtoolkit.applist.data.local.ProviderListLocal
+import com.plusdesarrollo.mpxtoolkit.applist.data.local.TaskListLocal
 import com.plusdesarrollo.mpxtoolkit.applist.data.model.ProviderListRemote
 import com.plusdesarrollo.mpxtoolkit.applist.databinding.FragmentHomeBinding
 import com.plusdesarrollo.mpxtoolkit.applist.ui.home.adapter.HomeAdapter
@@ -42,6 +43,8 @@ class HomeFragment : Fragment() {
 
 
         viewModelProvider.getProvider()
+
+
         lifecycleScope.launchWhenCreated {
             getProviders()
         }
@@ -49,28 +52,29 @@ class HomeFragment : Fragment() {
     }
 
 
-    private fun getPig(){
-        val api = ApiRest.build()
-        val call = api.getProvides()
-        call.enqueue(object : retrofit2.Callback<ProviderListRemote> {
-            override fun onResponse(
-                call: retrofit2.Call<ProviderListRemote>,
-                response: retrofit2.Response<ProviderListRemote>,
-            ) {
-                if (response.isSuccessful) {
-                    val result = response.body()
-                    Log.d("resultData", "${result?.providers}")
+    private suspend fun getPig() {
+        viewModelProvider.success.collect { res ->
+            when (res) {
+                is Success.Failure -> {
+                    Log.e("errorTask", res.error)
+                }
+
+                is Success.Loading -> {
+                    res.isLoading.let { loading ->
+                        binding.progressCircular.isVisible = loading
+                    }
+                }
+
+                is Success.SuccessFul<*> -> {
+                    val result = res.data as TaskListLocal
+                    Log.d("resultTask", "$result")
 
                 }
             }
-
-            override fun onFailure(call: retrofit2.Call<ProviderListRemote>, t: Throwable) {
-                Log.e("imageS", t.message.toString())
-            }
-
-        })
+        }
     }
-   private suspend fun getProviders() {
+
+    private suspend fun getProviders() {
         viewModelProvider.success.collect { res ->
             when (res) {
                 is Success.Failure -> {
@@ -78,13 +82,13 @@ class HomeFragment : Fragment() {
                 }
 
                 is Success.Loading -> {
-                    res.isLoading.let {loading->
+                    res.isLoading.let { loading ->
                         binding.progressCircular.isVisible = loading
                     }
                 }
+
                 is Success.SuccessFul<*> -> {
                     val result = res.data as ProviderListLocal
-                    Log.d("resultData", "$result")
                     adapter = HomeAdapter()
                     adapter.diffUtil(result.providers)
                     adapter.listProvider = result.providers
