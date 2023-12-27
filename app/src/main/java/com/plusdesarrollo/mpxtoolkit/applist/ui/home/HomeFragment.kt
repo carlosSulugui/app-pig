@@ -9,19 +9,18 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import com.plusdesarrollo.mpxtoolkit.applist.data.api.ApiRest
 import com.plusdesarrollo.mpxtoolkit.applist.data.local.ProviderListLocal
-import com.plusdesarrollo.mpxtoolkit.applist.data.local.TaskListLocal
-import com.plusdesarrollo.mpxtoolkit.applist.data.model.ProviderListRemote
 import com.plusdesarrollo.mpxtoolkit.applist.databinding.FragmentHomeBinding
 import com.plusdesarrollo.mpxtoolkit.applist.ui.home.adapter.HomeAdapter
 import com.plusdesarrollo.mpxtoolkit.applist.ui.home.viewmodel.ViewModelProvider
 import com.plusdesarrollo.mpxtoolkit.applist.utils.Success
+import com.plusdesarrollo.mpxtoolkit.applist.utils.toast
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 
 class HomeFragment : Fragment() {
+
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
     private lateinit var adapter: HomeAdapter
@@ -38,11 +37,16 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
 
-        viewModelProvider.getProvider()
+        viewModelProvider.getLocation {
+            activity?.toast("Latitud: ${it.latitude} Longitud: ${it.longitude}")
+        }
+
+
 
 
         lifecycleScope.launchWhenCreated {
@@ -51,28 +55,6 @@ class HomeFragment : Fragment() {
 
     }
 
-
-    private suspend fun getPig() {
-        viewModelProvider.success.collect { res ->
-            when (res) {
-                is Success.Failure -> {
-                    Log.e("errorTask", res.error)
-                }
-
-                is Success.Loading -> {
-                    res.isLoading.let { loading ->
-                        binding.progressCircular.isVisible = loading
-                    }
-                }
-
-                is Success.SuccessFul<*> -> {
-                    val result = res.data as TaskListLocal
-                    Log.d("resultTask", "$result")
-
-                }
-            }
-        }
-    }
 
     private suspend fun getProviders() {
         viewModelProvider.success.collect { res ->

@@ -1,11 +1,17 @@
 package com.plusdesarrollo.mpxtoolkit.applist.di
 
 
+import android.content.Context
+import androidx.room.Room
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.plusdesarrollo.mpxtoolkit.applist.core.URL_API
 import com.plusdesarrollo.mpxtoolkit.applist.data.api.RemoteService
+import com.plusdesarrollo.mpxtoolkit.applist.database.ProvidersDataBase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 import okhttp3.logging.HttpLoggingInterceptor
@@ -41,4 +47,32 @@ class Modules {
             .create()
 
     }
+
+
+
+    @Provides
+    @Singleton
+    fun provideFusedLocationClient(@ApplicationContext context:Context): FusedLocationProviderClient {
+        return LocationServices.getFusedLocationProviderClient(context)
+    }
+
+
+
+    @Provides
+    @Singleton
+    fun getContext(@ApplicationContext context: Context) = context
+
+
+    @Provides
+    @Singleton
+    fun providesROOM(@ApplicationContext context: Context) =
+        Room.databaseBuilder(context, ProvidersDataBase::class.java, "providesDatabase").build()
+
+
+    @Provides
+    @Singleton
+    fun providesDAO(db: ProvidersDataBase) = db.providesDao()
 }
+
+
+

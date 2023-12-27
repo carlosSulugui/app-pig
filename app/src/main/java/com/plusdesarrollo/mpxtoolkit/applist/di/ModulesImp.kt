@@ -13,6 +13,8 @@ import com.plusdesarrollo.mpxtoolkit.applist.data.datasource.GetTaskRemoterDataS
 import com.plusdesarrollo.mpxtoolkit.applist.data.datasource.GetTaskServerDataSource
 import com.plusdesarrollo.mpxtoolkit.applist.data.datasource.SearchProviderDataSource
 import com.plusdesarrollo.mpxtoolkit.applist.data.datasource.SearchProviderServerDataSource
+import com.plusdesarrollo.mpxtoolkit.applist.data.local.GetLocation
+import com.plusdesarrollo.mpxtoolkit.applist.data.local.GetLocationImp
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -39,6 +41,10 @@ abstract class ModulesImp {
 
     @Binds
     abstract fun bindCreateTaskServerDataSource(createTaskServerDataSource: CreateTaskServerDataSource): CreateTaskRemoteDataSource
+
+    @Binds
+    abstract fun bindLocationService(locationService: GetLocationImp): GetLocation
+
     @Binds
     abstract fun bindBuilderInterface(providerBuilder: ProviderBuilder): BuilderInterface
 

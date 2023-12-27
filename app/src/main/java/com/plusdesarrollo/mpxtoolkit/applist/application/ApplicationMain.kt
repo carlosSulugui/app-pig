@@ -9,4 +9,12 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 class ApplicationMain:Application(
 
 ) {
+    lateinit var appComponent: ApplicationContext
+
+    override fun onCreate() {
+        super.onCreate()
+
+        appComponent = ApplicationContext()
+
+    }
 }
