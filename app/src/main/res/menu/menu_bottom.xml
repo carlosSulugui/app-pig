@@ -9,6 +9,10 @@
         android:title="@string/post"
         android:id="@+id/registerFragment"
         android:icon="@drawable/ic_baseline_post_add_24"/>
+    <item
+        android:id="@+id/todoFragment"
+        android:title="Lista"
+        android:icon="@drawable/baseline_add_task_24"/>
 
 
 </menu>

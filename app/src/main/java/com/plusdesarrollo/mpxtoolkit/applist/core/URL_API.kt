@@ -8,3 +8,7 @@ object URL_API {
 object CODES {
     const val CODE  = 100
 }
+
+object BUNDLE {
+    const val PROVIDER = "provider"
+}

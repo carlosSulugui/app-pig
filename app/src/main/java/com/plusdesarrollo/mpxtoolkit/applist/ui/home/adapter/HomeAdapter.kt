@@ -9,7 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import arrow.core.right
+import com.bumptech.glide.ListPreloader
 import com.plusdesarrollo.mpxtoolkit.applist.R
+import com.plusdesarrollo.mpxtoolkit.applist.data.local.ProviderListLocal
 import com.plusdesarrollo.mpxtoolkit.applist.data.local.ProviderLocal
 import com.plusdesarrollo.mpxtoolkit.applist.data.model.ProvidersRemote
 import com.plusdesarrollo.mpxtoolkit.applist.databinding.ItemListBinding
@@ -19,6 +21,7 @@ import androidx.recyclerview.widget.DiffUtil as androidxDiffUtil
 class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
 
     var listProvider: List<ProviderLocal> = listOf()
+    var click: ((ProviderLocal)-> Unit)? = null
 
     fun diffUtil(listNew: List<ProviderLocal>) {
         val diffManager = DiffUtil(
@@ -47,6 +50,10 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
                 val decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
                 imgPig.setImageBitmap(decodedImage)
             }
+
+            textName.setOnClickListener {
+                click?.invoke(user)
+            }
         }
     }
 
@@ -61,5 +68,11 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
 
     override fun getItemCount(): Int {
         return listProvider.size
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun updateFilter(listPreloader: List<ProviderLocal>){
+        this.listProvider = listPreloader
+        notifyDataSetChanged()
     }
 }

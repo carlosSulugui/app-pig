@@ -26,8 +26,6 @@ class TaskViewModel @Inject constructor(
     suspend fun getTask() {
         viewModelScope.launch {
             val response = getTasks()
-
-
             response.collect { either ->
                 either.fold({ error ->
                     _status.value = Success.Failure(error.toString())

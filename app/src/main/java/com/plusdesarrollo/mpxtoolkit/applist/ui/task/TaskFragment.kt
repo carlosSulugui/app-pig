@@ -5,47 +5,37 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import com.plusdesarrollo.mpxtoolkit.applist.R
 import com.plusdesarrollo.mpxtoolkit.applist.data.local.TaskListLocal
-import com.plusdesarrollo.mpxtoolkit.applist.databinding.FragmentTodoBinding
+import com.plusdesarrollo.mpxtoolkit.applist.data.local.TasksLocal
+import com.plusdesarrollo.mpxtoolkit.applist.databinding.FragmentTaskBinding
 import com.plusdesarrollo.mpxtoolkit.applist.ui.home.adapter.TaskAdapter
 import com.plusdesarrollo.mpxtoolkit.applist.ui.home.viewmodel.TaskViewModel
 import com.plusdesarrollo.mpxtoolkit.applist.utils.Success
 import com.plusdesarrollo.mpxtoolkit.applist.utils.toast
-import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
-class TodoFragment : Fragment() {
-    private var _binding: FragmentTodoBinding? = null
+class TaskFragment : Fragment() {
+    private var _binding: FragmentTaskBinding? = null
     private val binding get() = _binding!!
+
     private val viewModel: TaskViewModel by viewModels()
     override fun onCreateView(
+
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
         // Inflate the layout for this fragment
 
-        _binding = FragmentTodoBinding.inflate(inflater, container, false)
+
+        _binding = FragmentTaskBinding.inflate(inflater, container, false)
         return binding.root
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        lifecycleScope.launchWhenCreated {
-            viewModel.getTask()
-
-        }
-
-        lifecycleScope.launchWhenCreated {
-            render()
-        }
-
-        binding.btnAdd.setOnClickListener {
-            toast("add to task")
-        }
     }
 
 
@@ -62,11 +52,9 @@ class TodoFragment : Fragment() {
                     val adapterTask = TaskAdapter()
                     val list = success.data as TaskListLocal
                     adapterTask.diffUtil(list.tasks)
-                    binding.recyclerView.adapter = adapterTask
-                    adapterTask.click= {id ->
-                        toast(id)
-                    }
+
                 }
+                else -> {}
             }
         }
     }

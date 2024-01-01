@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
 
         val navController = findNavController(R.id.fragment_container_view)
         val appBarConfiguration =
-            AppBarConfiguration(setOf(R.id.homeFragment, R.id.registerFragment))
+            AppBarConfiguration(setOf(R.id.homeFragment, R.id.registerFragment, R.id.todoFragment))
         setupActionBarWithNavController(navController, appBarConfiguration)
         binding.buttonNavigation.setupWithNavController(navController)
 

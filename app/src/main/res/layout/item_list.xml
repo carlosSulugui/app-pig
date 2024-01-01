@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:cardCornerRadius="10dp"
-        app:cardElevation="5dp"
+        app:cardElevation="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -29,11 +29,12 @@
                 app:cardCornerRadius="10dp"
                 app:cardElevation="0dp">
 
-                <ImageView
+                <com.plusdesarrollo.mpxtoolkit.applist.view.AspectRationView
                     android:id="@+id/img_pig"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="150dp"
                     android:scaleType="centerCrop"
+                    app:ratio="1.5"
                     android:background="@color/purple_500"/>
 
             </androidx.cardview.widget.CardView>
@@ -78,33 +79,6 @@
                 android:layout_marginTop="5dp"
                 android:textSize="14sp"
                 tools:text="Precio: Q. 2000 " />
-
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:padding="5dp"
-                android:gravity="center">
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/view_more"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="#2196F3"
-                    android:text="Ver mas"
-                    android:textAllCaps="false"
-                    android:textColor="@color/white"
-                    android:layout_marginHorizontal="5dp"/>
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/view_delete"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="#2196F3"
-                    android:text="  Eliminar registr   "
-                    android:textAllCaps="false"
-                    android:textColor="@color/white"
-                    android:layout_marginHorizontal="5dp"/>
-            </androidx.appcompat.widget.LinearLayoutCompat>
 
 
         </androidx.appcompat.widget.LinearLayoutCompat>

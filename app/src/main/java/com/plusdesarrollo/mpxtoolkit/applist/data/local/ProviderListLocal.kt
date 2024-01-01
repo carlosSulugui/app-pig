@@ -1,5 +1,7 @@
 package com.plusdesarrollo.mpxtoolkit.applist.data.local
 
+import com.google.gson.GsonBuilder
+
 data class ProviderListLocal(
     val providers: List<ProviderLocal> = listOf()
 )
@@ -14,4 +16,14 @@ data class ProviderLocal(
     val status:String? =  null,
     val photo:String? = null,
     val address:String? = null
-)
+){
+    companion object {
+        fun toJson(provider: ProviderLocal): String {
+            return GsonBuilder().create().toJson(provider)
+        }
+
+        fun fromJson(json: String): ProviderLocal {
+            return GsonBuilder().create().fromJson(json, ProviderLocal::class.java)
+        }
+    }
+}

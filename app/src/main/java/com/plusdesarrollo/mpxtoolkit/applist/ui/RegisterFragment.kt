@@ -103,7 +103,7 @@ class RegisterFragment(
         viewModelPost.success.collect { res ->
             when (res) {
                 is Success.Failure -> {
-                    activity?.toast(res.error)
+                    toast(res.error)
                     Log.d("error","${ res.error }")
                 }
 
@@ -118,7 +118,7 @@ class RegisterFragment(
                 is Success.SuccessFul<*> -> {
 
                     val message = res.data as Message
-                    activity?.toast(message.message)
+                    toast(message.message)
 
                 }
             }
@@ -130,7 +130,7 @@ class RegisterFragment(
         try {
             startActivityForResult(intent, CODE)
         } catch (e: Exception) {
-            activity?.toast("Error: ${e.message}")
+            toast("Error: ${e.message}")
         }
     }
 

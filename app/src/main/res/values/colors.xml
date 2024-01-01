@@ -8,6 +8,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 <!--    custom color for ui-->
+
+    <color name="colorPrimary">#F1F3FC</color>
     <color name = "strokeColor">#D9D9DA</color>
     <color name = "edit_background">#F1F3FC</color>
     <color name = "btn_background">#F4FBDA</color>

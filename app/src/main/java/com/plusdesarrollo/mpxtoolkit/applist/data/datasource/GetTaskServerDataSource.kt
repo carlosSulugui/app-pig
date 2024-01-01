@@ -37,6 +37,10 @@ private fun TaskListRemote.toDomainModel() =
 
 private fun TaskRemote.toDomainModel() =
     TasksLocal(
-        name, address, id, address, created_at
+        name = name,
+        id = id,
+        address = address,
+        status = status,
+        created_at = created_at,
     )
 
