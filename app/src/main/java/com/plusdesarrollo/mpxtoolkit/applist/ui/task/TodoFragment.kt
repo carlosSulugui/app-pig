@@ -5,9 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.plusdesarrollo.mpxtoolkit.applist.R
+import com.plusdesarrollo.mpxtoolkit.applist.actions.view.ActionButton
 import com.plusdesarrollo.mpxtoolkit.applist.data.local.TaskListLocal
 import com.plusdesarrollo.mpxtoolkit.applist.databinding.FragmentTodoBinding
 import com.plusdesarrollo.mpxtoolkit.applist.ui.home.adapter.TaskAdapter
@@ -21,6 +24,7 @@ class TodoFragment : Fragment() {
     private var _binding: FragmentTodoBinding? = null
     private val binding get() = _binding!!
     private val viewModel: TaskViewModel by viewModels()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -43,8 +47,10 @@ class TodoFragment : Fragment() {
             render()
         }
 
-        binding.btnAdd.setOnClickListener {
-            toast("add to task")
+        //como hacer uso del bottom sheet
+
+        binding.btnAdd.setOnClickListener{
+            openBottomSheet()
         }
     }
 
@@ -70,4 +76,15 @@ class TodoFragment : Fragment() {
             }
         }
     }
+    private fun  openBottomSheet(){
+        val actionBottom = ActionButton.newInstance()
+        actionBottom.show(
+            requireActivity().supportFragmentManager, ActionButton.TAG
+        )
+
+        actionBottom.event = {
+            toast("hola que tal como estas")
+        }
+    }
 }
+

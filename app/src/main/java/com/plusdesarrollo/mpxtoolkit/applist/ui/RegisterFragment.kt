@@ -3,6 +3,7 @@ package com.plusdesarrollo.mpxtoolkit.applist.ui
 import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.graphics.Bitmap
+import android.location.Location
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
@@ -36,6 +37,7 @@ class RegisterFragment(
     private val binding get() = _binding!!
     private val viewModelPost: ViewModelProvider by viewModels()
     private val CODE = 100
+    private var  location: String = ""
     private var bitmap: Bitmap? = null
     private var imagePhoto: String? = ""
 
@@ -57,6 +59,11 @@ class RegisterFragment(
         binding.image.setOnClickListener {
             takePhoto()
         }
+        viewModelPost.getLocation {
+            location = "${it.latitude} ${it.longitude}"
+        }
+
+
 
 
 
@@ -73,6 +80,7 @@ class RegisterFragment(
         val weight = binding.editPeso.text().toInt()
         val phone = binding.editTelephone.text()
 
+
         val provider = ProviderBuilder()
             .setName(name)
             .setPrice(price.toString().toDouble())
@@ -81,7 +89,7 @@ class RegisterFragment(
             .setPhoto(imagePhoto)
             .setId("27f0afcb-97d2-11ee-a208-0242ac150002")
             .setStatus("vivo")
-            .setAddress("calle 1")
+            .setAddress(location)
             .build()
 
 
